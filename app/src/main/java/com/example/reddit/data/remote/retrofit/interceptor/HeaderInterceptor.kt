@@ -1,6 +1,6 @@
 package com.example.reddit.data.remote.retrofit.interceptor
 
-import com.example.reddit.data.source.AuthCredentials
+import com.example.reddit.data.source.auth.AuthCredentials
 import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.Response

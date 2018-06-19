@@ -2,6 +2,7 @@ package com.example.reddit.android.di.component.app
 
 import android.app.Activity
 import com.example.reddit.RedditApplication
+import com.example.reddit.android.di.module.AndroidModule
 import com.example.reddit.android.di.module.ApplicationModule
 import com.example.reddit.android.ui.main.MainActivity
 import com.example.reddit.android.ui.main.di.MainActivityComponent
@@ -21,6 +22,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     (ApplicationModule::class),
+    (AndroidModule::class),
     (DataModule::class),
     (CacheModule::class),
     (NetModule::class),

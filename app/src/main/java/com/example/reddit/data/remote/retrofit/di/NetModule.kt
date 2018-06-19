@@ -2,7 +2,7 @@ package com.example.reddit.data.remote.retrofit.di
 
 import com.example.reddit.data.remote.retrofit.interceptor.HeaderInterceptor
 import com.example.reddit.data.remote.retrofit.service.AuthService
-import com.example.reddit.data.source.AuthCredentials
+import com.example.reddit.data.source.auth.AuthCredentials
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

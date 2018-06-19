@@ -1,7 +1,7 @@
 package com.example.reddit.data.datasource
 
-import io.reactivex.Completable
+import io.reactivex.Single
 
 interface AuthRemoteDataSource {
-    fun updateToken(): Completable
+    fun getToken(): Single<String>
 }
