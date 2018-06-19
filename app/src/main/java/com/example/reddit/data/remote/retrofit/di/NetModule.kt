@@ -1,6 +1,8 @@
 package com.example.reddit.data.remote.retrofit.di
 
-import com.google.gson.Gson
+import com.example.reddit.data.remote.retrofit.interceptor.HeaderInterceptor
+import com.example.reddit.data.remote.retrofit.service.AuthService
+import com.example.reddit.data.source.AuthCredentials
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -24,24 +26,39 @@ class NetModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor,
+                            headerInterceptor: HeaderInterceptor): OkHttpClient =
             OkHttpClient.Builder()
                     .addInterceptor(loggingInterceptor)
+                    .addInterceptor(headerInterceptor)
                     .build()
 
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .baseUrl("https://www.reddit.com/api/v1/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build()
     }
 
+    // Creds
+
+    @Singleton
+    @Provides
+    fun provideApiCredentials(): AuthCredentials {
+        return object : AuthCredentials {
+            override fun getLogin() = "JY-YKdvHMmUabg"
+            override fun getPassword() = "e6QGEqPBfBiVU3F1by3W7AJjKo0"
+        }
+    }
 
     // Services
 
-
+    @Singleton
+    @Provides
+    fun provideTokenService(retrofit: Retrofit): AuthService = retrofit.create(AuthService::class.java)
 }

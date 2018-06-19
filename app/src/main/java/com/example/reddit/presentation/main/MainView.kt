@@ -1,4 +1,4 @@
-package com.example.eugene.rxtestproject.presentation.main
+package com.example.reddit.presentation.main
 
 import com.example.reddit.presentation.PresenterView
 
