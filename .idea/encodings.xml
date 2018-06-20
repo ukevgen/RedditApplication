@@ -7,7 +7,6 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/reddit/data/remote/retrofit/di/NetModule.kt" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/reddit/domain/usecase/base/AbsBaseUseCase.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/reddit/domain/usecase/base/AbsUseCaseCompl.kt" charset="windows-1251" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/reddit/domain/usecase/base/AbsUseCaseMaybe.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/reddit/domain/usecase/base/AbsUseCaseObs.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/reddit/domain/usecase/base/AbsUseCaseSingle.kt" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/reddit/domain/usecase/base/SubscriberUseCase.kt" charset="windows-1251" />

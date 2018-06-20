@@ -10,6 +10,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.HasServiceInjector
 import dagger.android.support.HasSupportFragmentInjector
+import net.danlew.android.joda.JodaTimeAndroid
 import javax.inject.Inject
 
 class RedditApplication : Application(), HasActivityInjector, HasSupportFragmentInjector, HasServiceInjector {
@@ -25,6 +26,8 @@ class RedditApplication : Application(), HasActivityInjector, HasSupportFragment
                 .applicationModule(ApplicationModule(this))
                 .create(this)
                 .inject(this)
+
+        JodaTimeAndroid.init(this)
 
     }
 
