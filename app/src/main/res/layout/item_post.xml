@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/ivPostThumbnail"
@@ -18,6 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="2"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/tvPostDetails"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivPostThumbnail"
@@ -25,6 +27,7 @@
         tools:text="Japanese fans pick up trash after World Cup" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:textSize="14sp"
         android:id="@+id/tvPostDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -35,6 +38,7 @@
         tools:text="submitted 19 hours ago by" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:textSize="14sp"
         android:id="@+id/tvRattingDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

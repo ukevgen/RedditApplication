@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RedditApplication</string>
+
+    <string name="post_details_template">submitted %s ago by %s, to %s</string>
+
+    <string name="post_rating_details"> %d comments %d likes</string>
 </resources>

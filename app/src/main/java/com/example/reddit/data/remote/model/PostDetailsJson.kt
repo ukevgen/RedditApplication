@@ -20,10 +20,10 @@ class PostDetailsJson {
     val title = EmptyConstants.EMPTY_STRING
 
     @field:SerializedName("likes")
-    val likes = EmptyConstants.EMPTY_LONG
+    val likes : Long? = null
 
     @field:SerializedName("num_comments")
-    val commentsCount = EmptyConstants.EMPTY_LONG
+    val commentsCount : Long? = null
 
     @field:SerializedName("thumbnail")
     val thumbnail = EmptyConstants.EMPTY_STRING

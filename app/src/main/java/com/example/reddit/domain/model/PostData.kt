@@ -8,9 +8,9 @@ data class PostData(val lastPostKey: String, val posts: List<PostDetails>)
 class PostDetails {
 
     var title: String = EmptyConstants.EMPTY_STRING
-    var likesCount = EmptyConstants.EMPTY_LONG
+    var likesCount: Long? = null
     var id = EmptyConstants.EMPTY_STRING
-    var commentsCount = EmptyConstants.EMPTY_LONG
+    var commentsCount: Long? = null
     var thumbnail = EmptyConstants.EMPTY_STRING
     var subreddit = EmptyConstants.EMPTY_STRING
     var score = EmptyConstants.EMPTY_LONG
