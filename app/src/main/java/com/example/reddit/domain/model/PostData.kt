@@ -3,9 +3,9 @@ package com.example.reddit.domain.model
 import com.example.reddit.EmptyConstants
 import org.joda.time.DateTime
 
-data class PostData(val lastPostKey: String, val posts: List<PostDetails>)
+data class PostData(val lastPostKey: String, val posts: List<Post>)
 
-class PostDetails {
+class Post {
 
     var title: String = EmptyConstants.EMPTY_STRING
     var likesCount: Long? = null

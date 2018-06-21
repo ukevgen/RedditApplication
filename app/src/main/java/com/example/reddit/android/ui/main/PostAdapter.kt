@@ -7,40 +7,54 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.reddit.R
 import com.example.reddit.android.DateTimeUtils
-import com.example.reddit.domain.model.PostDetails
+import com.example.reddit.domain.model.Post
 import kotlinx.android.synthetic.main.item_post.view.*
 
 
-class PostAdapter : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+class PostAdapter(val itemClickListener: (post: Post) -> Unit)
+    : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
-    var postDetailsList: List<PostDetails> = listOf()
+
+    var postList = mutableListOf<Post>()
         set(value) {
-            dispatchData(value)
+            field.clear()
+            when (postList.isEmpty()) {
+                true -> {
+                    field.addAll(value)
+                    notifyDataSetChanged()
+                }
+                else -> {
+                    field.addAll(value)
+                    dispatchData(value)
+                }
+            }
         }
-
-    private fun dispatchData(newData: List<PostDetails>) {
-        val diffResult = DiffUtil.calculateDiff(
-                PostsDiffUtilCallback(postDetailsList, newData)
-        )
-        diffResult.dispatchUpdatesTo(this)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolder(inflater.inflate(R.layout.item_post, parent, false))
     }
 
-    override fun getItemCount() = postDetailsList.size
+    override fun getItemCount() = postList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
     }
 
+    private fun dispatchData(newData: List<Post>) {
+        val diffResult = DiffUtil.calculateDiff(
+                PostsDiffUtilCallback(postList, newData)
+        )
+        diffResult.dispatchUpdatesTo(this)
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(position: Int) {
-            val post = postDetailsList[position]
+            val post = postList[position]
             val passedTime = DateTimeUtils.formatDuration(post.createdTime.millis)
+
+            itemView.setOnClickListener { itemClickListener.invoke(post) }
 
             itemView.apply {
                 tvTitle.text = post.title
@@ -51,6 +65,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
                         post.subreddit)
                 tvRattingDetails.text = resources.getString(
                         R.string.post_rating_details,
+                        post.score,
                         post.commentsCount ?: 0L,
                         post.likesCount ?: 0L
                 )

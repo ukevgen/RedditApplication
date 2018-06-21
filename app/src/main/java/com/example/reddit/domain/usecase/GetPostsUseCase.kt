@@ -16,5 +16,5 @@ class GetPostsUseCase @Inject constructor(val updateTokenUseCase: UpdateTokenUse
                 )
     }
 
-    class Params(val afterPostKey: String)
+    class Params(val afterPostKey: String = "")
 }

@@ -1,10 +1,10 @@
 package com.example.reddit.android.ui.main
 
 import android.support.v7.util.DiffUtil
-import com.example.reddit.domain.model.PostDetails
+import com.example.reddit.domain.model.Post
 
-class PostsDiffUtilCallback(val oldList: List<PostDetails>,
-                            val newList: List<PostDetails>) : DiffUtil.Callback() {
+class PostsDiffUtilCallback(val oldList: List<Post>,
+                            val newList: List<Post>) : DiffUtil.Callback() {
 
     override fun getOldListSize() = oldList.size
     override fun getNewListSize() = newList.size

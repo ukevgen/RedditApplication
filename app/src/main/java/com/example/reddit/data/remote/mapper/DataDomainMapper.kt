@@ -2,14 +2,14 @@ package com.example.reddit.data.remote.mapper
 
 import com.example.reddit.data.remote.model.PostDataJson
 import com.example.reddit.data.remote.model.PostDetailsJson
+import com.example.reddit.domain.model.Post
 import com.example.reddit.domain.model.PostData
-import com.example.reddit.domain.model.PostDetails
 import org.joda.time.DateTime
 
 object DataDomainMapper {
 
     fun toDomain(postDetailsJson: PostDetailsJson) =
-            PostDetails().apply {
+            Post().apply {
 
                 id = postDetailsJson.id
                 title = postDetailsJson.title
