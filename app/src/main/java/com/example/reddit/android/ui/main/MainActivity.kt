@@ -22,7 +22,7 @@ class MainActivity : BaseActivity(), MainView {
 
 
     @Inject lateinit var presenter: MainPresenter
-    private lateinit var adaper: PostAdapter
+    private lateinit var adapter: PostAdapter
 
     override fun getActivityPresenter() = presenter
 
@@ -30,14 +30,14 @@ class MainActivity : BaseActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adaper = PostAdapter({ post -> presenter.onItemClicked(post) })
+        adapter = PostAdapter({ post -> presenter.onItemClicked(post) })
         val recyclerLayoutManager = LinearLayoutManager(this)
 
         recyclerView.apply {
             addItemDecoration(DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL))
             addItemDecoration(DividerItemDecoration(ctx, DividerItemDecoration.HORIZONTAL))
             layoutManager = recyclerLayoutManager
-            adapter = this@MainActivity.adaper
+            adapter = this@MainActivity.adapter
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     fetchNewData(dy, recyclerLayoutManager)
@@ -54,8 +54,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun renderPosts(posts: MutableList<Post>) {
-        adaper.dispatchData(posts)
-        loading = false
+        adapter.dispatchData(posts)
     }
 
     override fun renderProgress(visibility: Boolean) {
@@ -72,17 +71,17 @@ class MainActivity : BaseActivity(), MainView {
 
     }
 
-    override fun renderInitialProgress(visibility: Boolean) {
-        initialProgressBar.visibility = if (visibility) View.VISIBLE else View.GONE
+    override fun renderLoadDataAccessibility(access : Boolean) {
+        loadingAccess = access
     }
 
     // Private
-    private var loading = false
+    private var loadingAccess = true
 
     private fun fetchNewData(dy: Int, layoutManager: LinearLayoutManager) {
-        if (dy > 0 && !loading && isLastVisibleItem(layoutManager)) {
+        if (dy > 0 && loadingAccess && isLastVisibleItem(layoutManager)) {
             presenter.getPosts()
-            loading = true
+            renderLoadDataAccessibility(false)
         }
     }
 

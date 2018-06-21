@@ -7,13 +7,6 @@
     android:largeHeap="true"
     tools:context=".android.ui.main.MainActivity">
 
-    <ProgressBar
-        android:id="@+id/initialProgressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:indeterminate="true"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

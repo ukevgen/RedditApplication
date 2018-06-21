@@ -6,6 +6,7 @@ import com.example.reddit.domain.usecase.GetPostsUseCase
 import com.example.reddit.presentation.BasePresenter
 import io.reactivex.SingleTransformer
 import io.reactivex.observers.DisposableSingleObserver
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class MainPresenter @Inject constructor(private val getPostsUseCase: GetPostsUseCase) : BasePresenter<MainView>() {
@@ -13,9 +14,8 @@ class MainPresenter @Inject constructor(private val getPostsUseCase: GetPostsUse
     private var afterPostKey = ""
     private val postList = mutableListOf<Post>()
 
-    override fun onTakeView(view: MainView) {
-        super.onTakeView(view)
-
+    override fun onViewShown() {
+        super.onViewShown()
         getPosts()
     }
 
@@ -29,13 +29,16 @@ class MainPresenter @Inject constructor(private val getPostsUseCase: GetPostsUse
             }
 
             override fun onError(e: Throwable) {
-                view?.renderMessage(e.localizedMessage)
+                when (e) {
+                    is UnknownHostException -> view?.renderMessage("Please, check your internet connection")
+                    else -> view?.renderMessage(e.localizedMessage)
+                }
                 e.printStackTrace()
             }
         }, SingleTransformer { upstream ->
             upstream.doFinally {
+                view?.renderLoadDataAccessibility(true)
                 view?.renderProgress(false)
-                view?.renderInitialProgress(false)
             }
         }, GetPostsUseCase.Params(afterPostKey))
     }
