@@ -5,6 +5,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.reddit.R
 import com.example.reddit.android.DateTimeUtils
 import com.example.reddit.domain.model.Post
@@ -14,21 +17,7 @@ import kotlinx.android.synthetic.main.item_post.view.*
 class PostAdapter(val itemClickListener: (post: Post) -> Unit)
     : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
-
-    var postList = mutableListOf<Post>()
-        set(value) {
-            field.clear()
-            when (postList.isEmpty()) {
-                true -> {
-                    field.addAll(value)
-                    notifyDataSetChanged()
-                }
-                else -> {
-                    field.addAll(value)
-                    dispatchData(value)
-                }
-            }
-        }
+    private val postList = mutableListOf<Post>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -41,14 +30,21 @@ class PostAdapter(val itemClickListener: (post: Post) -> Unit)
         holder.bind(position)
     }
 
-    private fun dispatchData(newData: List<Post>) {
+    fun dispatchData(newData: List<Post>) {
         val diffResult = DiffUtil.calculateDiff(
                 PostsDiffUtilCallback(postList, newData)
         )
+        postList.clear()
+        postList.addAll(newData)
         diffResult.dispatchUpdatesTo(this)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val glideRequestOptions = RequestOptions()
+                .centerCrop()
+                .error(R.drawable.ic_not_found)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
 
         fun bind(position: Int) {
             val post = postList[position]
@@ -69,8 +65,12 @@ class PostAdapter(val itemClickListener: (post: Post) -> Unit)
                         post.commentsCount ?: 0L,
                         post.likesCount ?: 0L
                 )
-
             }
+
+            Glide.with(itemView.context)
+                    .load(post.thumbnail)
+                    .apply(glideRequestOptions)
+                    .into(itemView.ivPostThumbnail)
         }
 
     }

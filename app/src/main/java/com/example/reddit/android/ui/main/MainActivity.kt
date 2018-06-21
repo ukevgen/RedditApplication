@@ -51,7 +51,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun renderPosts(posts: MutableList<Post>) {
-        adaper.postList = posts
+        adaper.dispatchData(posts)
         loading = false
     }
 

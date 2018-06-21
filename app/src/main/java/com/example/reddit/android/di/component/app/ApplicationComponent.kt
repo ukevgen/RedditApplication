@@ -4,6 +4,7 @@ import android.app.Activity
 import com.example.reddit.RedditApplication
 import com.example.reddit.android.di.module.AndroidModule
 import com.example.reddit.android.di.module.ApplicationModule
+import com.example.reddit.android.di.module.GlideApplicationModule
 import com.example.reddit.android.ui.main.MainActivity
 import com.example.reddit.android.ui.main.di.MainActivityComponent
 import com.example.reddit.data.cache.di.CacheModule
@@ -24,6 +25,7 @@ import javax.inject.Singleton
     (ApplicationModule::class),
     (AndroidModule::class),
     (DataModule::class),
+    (GlideApplicationModule::class),
     (CacheModule::class),
     (NetModule::class),
     (RemoteModule::class),
