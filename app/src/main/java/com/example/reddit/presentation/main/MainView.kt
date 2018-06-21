@@ -7,4 +7,5 @@ interface MainView : PresenterView {
     fun renderMessage(message: String)
     fun renderPosts(posts: MutableList<Post>)
     fun renderProgress(visibility: Boolean)
+    fun renderPostDetails(articleLink: String?)
 }

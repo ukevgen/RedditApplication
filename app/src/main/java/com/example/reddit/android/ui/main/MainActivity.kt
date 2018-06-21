@@ -1,6 +1,9 @@
 package com.example.reddit.android.ui.main
 
+import android.net.Uri
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -59,6 +62,17 @@ class MainActivity : BaseActivity(), MainView {
         progressBar.visibility = if (visibility) View.VISIBLE else View.GONE
     }
 
+    override fun renderPostDetails(articleLink: String?) {
+        val customTabsIntent = CustomTabsIntent.Builder()
+                .addDefaultShareMenuItem()
+                .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                .setShowTitle(true)
+                .build()
+        customTabsIntent.launchUrl(this, Uri.parse(articleLink))
+
+    }
+
+    // Private
     private var loading = false
 
     private fun fetchNewData(dy: Int, layoutManager: LinearLayoutManager) {

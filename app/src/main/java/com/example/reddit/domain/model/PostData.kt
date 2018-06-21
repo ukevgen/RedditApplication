@@ -15,5 +15,6 @@ class Post {
     var subreddit = EmptyConstants.EMPTY_STRING
     var score = EmptyConstants.EMPTY_LONG
     var author = EmptyConstants.EMPTY_STRING
+    var articleLink: String? = null
     var createdTime = DateTime()
 }

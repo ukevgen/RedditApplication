@@ -1,30 +1,33 @@
 package com.example.reddit.data.remote.mapper
 
 import com.example.reddit.data.remote.model.PostDataJson
-import com.example.reddit.data.remote.model.PostDetailsJson
+import com.example.reddit.data.remote.model.PostJson
 import com.example.reddit.domain.model.Post
 import com.example.reddit.domain.model.PostData
 import org.joda.time.DateTime
 
 object DataDomainMapper {
 
-    fun toDomain(postDetailsJson: PostDetailsJson) =
+    val redditHost = "https://www.reddit.com"
+
+    fun toDomain(postJson: PostJson) =
             Post().apply {
 
-                id = postDetailsJson.id
-                title = postDetailsJson.title
-                likesCount = postDetailsJson.likes
-                commentsCount = postDetailsJson.commentsCount
-                thumbnail = postDetailsJson.thumbnail
-                subreddit = postDetailsJson.subreddit
-                score = postDetailsJson.score
-                author = postDetailsJson.author
-                createdTime = DateTime(postDetailsJson.createdTime)
+                id = postJson.id
+                title = postJson.title
+                likesCount = postJson.likes
+                commentsCount = postJson.commentsCount
+                thumbnail = postJson.thumbnail
+                subreddit = postJson.subreddit
+                score = postJson.score
+                author = postJson.author
+                createdTime = DateTime(postJson.createdTime * 1000)
+                articleLink = redditHost + postJson.articleLink
             }
 
     fun toDomain(postDataJson: PostDataJson) = PostData(
             postDataJson.lastPostKey,
-            postDataJson.postItems.map { toDomain(it.postDetailsJson) }
+            postDataJson.postItems.map { toDomain(it.postJson) }
     )
 
 }

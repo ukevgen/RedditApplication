@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 class PostItemJson {
 
     @field:SerializedName("data")
-    val postDetailsJson: PostDetailsJson = PostDetailsJson()
+    val postJson: PostJson = PostJson()
 
     @field:SerializedName("kind")
     val kind: String = EmptyConstants.EMPTY_STRING

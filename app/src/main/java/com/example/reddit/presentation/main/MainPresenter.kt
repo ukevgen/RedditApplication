@@ -40,7 +40,7 @@ class MainPresenter @Inject constructor(private val getPostsUseCase: GetPostsUse
     }
 
     fun onItemClicked(post: Post) {
-        getPosts()
+        view?.renderPostDetails(post.articleLink)
     }
 
 }
