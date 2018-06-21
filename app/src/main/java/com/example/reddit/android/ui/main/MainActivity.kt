@@ -72,6 +72,10 @@ class MainActivity : BaseActivity(), MainView {
 
     }
 
+    override fun renderInitialProgress(visibility: Boolean) {
+        initialProgressBar.visibility = if (visibility) View.VISIBLE else View.GONE
+    }
+
     // Private
     private var loading = false
 

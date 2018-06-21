@@ -35,6 +35,7 @@ class MainPresenter @Inject constructor(private val getPostsUseCase: GetPostsUse
         }, SingleTransformer { upstream ->
             upstream.doFinally {
                 view?.renderProgress(false)
+                view?.renderInitialProgress(false)
             }
         }, GetPostsUseCase.Params(afterPostKey))
     }
